@@ -28,16 +28,37 @@ const UserMessages = () => {
     <div className="messages" >
       <h1>{location.state.friendname}</h1>
       <div className="messagesbody">
+        <div className="dateDiv">{context[0].usermessages[0].time && new Date(context[0].usermessages[0].time).toLocaleDateString()}</div>
     {context[0].usermessages.map((usermessage,index)=>{
-      if(usermessage.senderid==id || usermessage.receiverid==id){
-        if(usermessage.senderid==id){
-          return  <div key={index} className="left"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
+      const messageDate = new Date(usermessage.time);
+      const today = new Date();
+      const displayDate = 
+        messageDate.getDate() === today.getDate() &&
+        messageDate.getMonth() === today.getMonth() &&
+        messageDate.getFullYear() === today.getFullYear()
+          ? "Today"
+          : messageDate.toLocaleDateString();
+      return(
+        (index>0 && new Date(usermessage.time).getDate()>new Date(context[0].usermessages[index-1].time).getDate())
+        ?<><div className="dateDiv">{displayDate}</div>
+        {
+          (usermessage.senderid==id || usermessage.receiverid==id)
+            ?(usermessage.senderid==id)
+              ?<div key={index} className="left"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
+              :<div key={index} className="right"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>  
+            :null
+
         }
-        else{
-          return <div key={index} className="right"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
-        }
-      }
-    })}
+
+        </>
+
+      :(usermessage.senderid==id || usermessage.receiverid==id)
+            ?(usermessage.senderid==id)
+              ?<div key={index} className="left"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
+              :<div key={index} className="right"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>  
+            :null
+            );
+    })}  
         <div ref={messagesEndRef}></div>
     </div>
     <div className="sendMessage"><input type="text" ref={inputElement} placeholder="Enter message here"  onChange={(e)=>setMessage(e.target.value)}/><img onClick={handleSend} src={rightArrow} alt="" /></div>
