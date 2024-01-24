@@ -1,0 +1,158 @@
+body{
+  margin: 0;
+}
+nav{
+  background-color:#27408b;
+  color: white;
+  margin-bottom: 2px;
+}
+nav h1{
+  margin: 0;
+  padding-bottom: 10px;
+}
+.UserArea{
+ 
+}
+.UserArea>div>h3{
+  margin: 0;
+}
+.sidebar{
+  position: fixed;
+}
+.sidebar>div{
+  width: 150px;
+}
+.usercard{
+  padding: 15px;
+  cursor: pointer;
+  border-bottom: 1px solid gray;
+  background-color: #27408b;
+  color: white;
+  font-size: 1.2rem;
+}
+.usercardActive{
+  padding: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid white;
+    background-color: #4876ff;
+    color: white;
+    font-size: 1.4rem;
+}
+.messages{
+  background-color: lightgrey;
+  margin-left: 13rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 92vh;
+  
+}
+.messagesbody{
+  height:445px;
+  overflow-y:auto;
+}
+.messages>h1{
+  margin: 0;
+  text-align: center;
+  background-color:#6890F0 ;
+  color: black;
+}
+.right{
+  background-color: white;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: 550;
+  width: fit-content;
+  margin-left: auto;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-right: 8px;
+}
+.left{
+  background-color: #6890F0;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  margin-left: 5px;
+  margin-top: 2px;
+  font-size: 1.1rem;
+  font-weight: 550;
+  width: fit-content;
+  margin-bottom: 10px;
+}
+.left span{
+  display: block;
+}
+.left span:nth-child(2){
+  font-size: 0.7rem;
+  color:whitesmoke;
+  width: fit-content;
+  margin-left: auto;
+}
+.right span {
+  display: block;
+}
+
+.right span:nth-child(2) {
+  font-size: 0.7rem;
+  color: grey;
+  width: fit-content;
+  margin-left: auto;
+}
+.sendMessage{
+  display: flex;
+}
+.sendMessage>input{
+  height: 30px;
+  margin-right: 3px;
+  margin-left: 2px;
+  border-radius: 5px;
+  border: 0px;
+  flex-grow: 1;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+.sendMessage img{
+  margin-right: 10px;
+  vertical-align: middle;
+  height: 35px;
+  border-radius: 5px;
+}
+@media only screen and (max-width: 600px) {
+  .sidebar {
+    top: 40px;
+    display: flex;
+    width: 100vw;
+    height: 70px;
+    overflow-x: auto;
+  }
+  .sidebar>div{
+    width:fit-content;
+    flex-shrink: 0;
+    border-right: 1px solid gray;
+    padding: 10px;
+  }
+  .sidebar>h3{
+    display: none;
+  }
+  .messages{
+    margin-top: 70px;
+    margin-left: 0;
+    min-height: 80vh;
+  }
+  .messagesbody{
+    height: 375px;
+
+  }
+}
+@media only screen and (min-width: 600px) {
+  .sidebar {
+    top: 40px;
+    height:95vh;
+    overflow-y: auto;
+  }
+}
