@@ -84,7 +84,7 @@ const ProfilePic = () => {
             {withCredentials:true}
             ) ;
             if(response.data.message=='successfully added profile pic'){
-                navigate('/users',{state:{username:location.state.username,imageUrl:response.data.imageUrl}});
+                navigate('/users',{state:{username:location.state.username,myimageUrl:response.data.imageUrl}});
             }
         }
         }>Upload profile pic</button>}
