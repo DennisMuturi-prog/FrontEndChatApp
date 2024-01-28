@@ -21,7 +21,7 @@ const Login = () => {
         }
         );
         if(response.data.status=='success'){
-            navigate('/users',{state:{username:response.data.username,imageUrl:response.data.imageUrl}});
+            navigate('/users',{state:{username:response.data.username,myimageUrl:response.data.imageUrl}});
         }
         else{
             setWrongDetails(true);
