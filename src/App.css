@@ -10,17 +10,23 @@ nav h1{
   margin: 0;
   padding-bottom: 10px;
 }
-.UserArea{
- 
+.UserArea>div>h3>img{
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
 }
 .UserArea>div>h3{
   margin: 0;
+  display: flex;
+  align-items: center;
+  background-color: grey;
+  color: white;
 }
 .sidebar{
   position: fixed;
 }
 .sidebar>div{
-  width: 150px;
+  width: 210px;
 }
 .usercard{
   padding: 15px;
@@ -29,6 +35,18 @@ nav h1{
   background-color: #27408b;
   color: white;
   font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.usercard>img{
+  width: 45px;
+  height: 45px;
+}
+.usercardActive>img{
+  width: 45px;
+  height: 45px;
+
 }
 .usercardActive{
   padding: 15px;
@@ -36,14 +54,17 @@ nav h1{
     border-bottom: 1px solid white;
     background-color: #4876ff;
     color: white;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 .messages{
   background-color: lightgrey;
-  margin-left: 13rem;
+  margin-left: 17rem;
   display: flex;
   flex-direction: column;
-  min-height: 92vh;
+  min-height: 85vh;
   
 }
 .messagesbody{
