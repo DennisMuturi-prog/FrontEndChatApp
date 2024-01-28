@@ -28,7 +28,7 @@ const UserMessages = () => {
     <div className="messages" >
       <h1>{location.state.friendname}</h1>
       <div className="messagesbody">
-        <div className="dateDiv">{context[0].usermessages[0].time && new Date(context[0].usermessages[0].time).toLocaleDateString()}</div>
+        {context[0].usermessages[0]&&<div className="dateDiv">{context[0].usermessages[0].time && new Date(context[0].usermessages[0].time).toLocaleDateString()}</div>}
     {context[0].usermessages.map((usermessage,index)=>{
       const messageDate = new Date(usermessage.time);
       const today = new Date();
