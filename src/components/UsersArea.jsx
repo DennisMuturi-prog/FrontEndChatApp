@@ -46,8 +46,8 @@ const UsersArea = () => {
     <>
     <div className="UserArea">
       <div className='sidebar'>
-        <h3>Welcome,{location.state.username}<img src={location.state.imageUrl}/></h3>
-        {users.map((user,index)=>location.state.username!==user.username&&<UserInfo key={index} userdata={user}/>)}
+        <h3>Welcome,{location.state.username}<img src={location.state.myimageUrl}/></h3>
+        {users.map((user,index)=>location.state.username!==user.username&&<UserInfo key={index} userdata={user} usermessages={messages}/>)}
       </div>
     <Outlet context={[{usermessages:messages},{addMessage:addMessage}]}/>
     </div>
