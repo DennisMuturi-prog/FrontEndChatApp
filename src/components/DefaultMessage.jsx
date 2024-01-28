@@ -1,6 +1,6 @@
 const DefaultMessage = () => {
   return (
-    <div>DefaultMessage</div>
+    <div className="messages">DefaultMessage</div>
   )
 }
 
