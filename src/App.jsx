@@ -6,6 +6,7 @@ import Register from './components/Register'
 import UsersArea from './components/UsersArea'
 import UserMessages from './components/UserMessages'
 import DefaultMessage from './components/DefaultMessage'
+import ProfilePic from './components/ProfilePic'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
     <Routes>
       <Route path='/' element={<Login/>}/>
       <Route path='/register' element={<Register/>}/>
+      <Route path='/profilepic' element={<ProfilePic/>}/>
       <Route path='/users' element={<UsersArea/>}>
         <Route index element={<DefaultMessage/>}/>
         <Route path=':id' element={<UserMessages/>}/>
