@@ -7,6 +7,7 @@
     padding: 20px;
     border-radius: 20px;
     position: relative;
+    margin-inline: auto;
 }
 
 .title {
