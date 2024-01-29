@@ -73,6 +73,20 @@ nav h1{
     align-items: center;
     gap: 10px;
 }
+.onlineDiv{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: green;
+  display: inline-block;
+  margin-left: 10px;
+}
+.onlineSpan{
+  font-size: 0.95rem;
+  margin-left: 10px;
+  color: green;
+
+}
 .messages{
   background-color: lightgrey;
   margin-left: 17rem;
