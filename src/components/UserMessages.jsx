@@ -19,7 +19,7 @@ const UserMessages = () => {
       setMessages(messages);
     },[id,context])
     
-    useEffect(scrollToBottom,[context]);
+    useEffect(scrollToBottom,[messages]);
     const handleSend=async ()=>{
       const response=await axios.post('http://localhost:4000/sendmessage',
       {
