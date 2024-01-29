@@ -17,7 +17,8 @@ const UserInfo = ({userdata,usermessages}) => {
   return (
     <div className={userdata._id==id?"usercardActive":"usercard"} onClick={handleClick}>
       <img src={userdata.imageUrl?userdata.imageUrl:userIcon}/>
-      <div className="latestmessage"><span>{userdata.username}</span><span>{latestMessage ? latestMessage.message : 'No messages yet'}</span></div> 
+      <div className="latestmessage"><span>{userdata.username}{
+        userdata.status=='online'?<> <span className="onlineSpan">online</span><div className="onlineDiv"></div></>:''}</span><span>{latestMessage ? latestMessage.message : 'No messages yet'}</span></div> 
     </div>
   )
 }
