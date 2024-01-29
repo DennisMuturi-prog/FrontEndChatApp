@@ -24,7 +24,7 @@ const Register = () => {
         }
       )
       if(response.data.status=='successfully registered'){
-        navigate('/profilepic',{state:{username:`${firstname} ${secondname}`}});
+        navigate('/profilepic',{state:{username:`${firstname}${secondname}`}});
       }
 
     }
