@@ -22,6 +22,14 @@ nav h1{
   background-color: grey;
   color: white;
 }
+.username{
+  display: inline-block;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
 .latestmessage{
   display: flex;
   flex-direction: column;
