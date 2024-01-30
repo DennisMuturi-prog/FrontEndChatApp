@@ -20,6 +20,35 @@ const UserMessages = () => {
     },[id,context])
     
     useEffect(scrollToBottom,[messages]);
+    const checkDate=(time)=>{
+      const messageDate = new Date(time);
+          const today = new Date();
+          const yesterday = new Date();
+          yesterday.setDate(today.getDate() - 1);
+
+          let displayDate;
+          if (
+             messageDate.getDate() === today.getDate() &&
+            messageDate.getMonth() === today.getMonth() &&
+            messageDate.getFullYear() === today.getFullYear()
+          ) {
+             displayDate = "Today";
+          } else if (
+            messageDate.getDate() === yesterday.getDate() &&
+            messageDate.getMonth() === yesterday.getMonth() &&
+            messageDate.getFullYear() === yesterday.getFullYear()
+          ) {
+            displayDate = "Yesterday";
+          } else {
+            displayDate = messageDate.toLocaleDateString(undefined, {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+          });
+          }
+
+         return displayDate;
+    }
     const handleSend=async ()=>{
       const response=await axios.post('http://localhost:4000/sendmessage',
       {
@@ -36,16 +65,9 @@ const UserMessages = () => {
         <img src={location.state.imageUrl?location.state.imageUrl:userIcon}/>
         {location.state.friendname}</h1>
       <div className="messagesbody">
-        {messages[0] &&<div className="dateDiv">{new Date(context[0].usermessages[0].time).toLocaleDateString()}</div>}
+        {messages[0] &&<div className="dateDiv">{checkDate(messages[0].time)}</div>}
         {messages.map((usermessage,index)=>{
-          const messageDate = new Date(usermessage.time);
-          const today = new Date();
-          const displayDate = 
-            messageDate.getDate() === today.getDate() &&
-            messageDate.getMonth() === today.getMonth() &&
-            messageDate.getFullYear() === today.getFullYear()
-           ? "Today"
-           : messageDate.toLocaleDateString();
+          const displayDate=checkDate(usermessage.time);
         return(
         (index>0 && new Date(usermessage.time).getDate()>new Date(messages[index-1].time).getDate())
         ?<><div className="dateDiv">{displayDate}</div>
