@@ -38,9 +38,9 @@ const UsersArea = () => {
     }));
     }
     socket.connect();
-    socket.on('db-changes',onMessageReceived);
-    socket.on('online',onUserBeingOnline);
-    socket.on('offline',onUserBeingOffline);
+    socket.on('db-changes', onMessageReceived);
+    socket.on('online', onUserBeingOnline);
+    socket.on('offline', onUserBeingOffline);
     return ()=>{
       socket.off('db-changes',onMessageReceived);
       socket.off('online',onUserBeingOnline);
