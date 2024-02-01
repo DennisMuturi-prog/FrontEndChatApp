@@ -50,13 +50,13 @@ const UsersArea = () => {
     
     },[])
   const getUsers=async ()=>{
-    const response = await axios.get('http://localhost:4000/userfriends', { withCredentials: true });
+    const response = await axios.get('https://backendchatapp-ghen.onrender.com/userfriends', { withCredentials: true });
     setUsers(response.data);
     console.log(response.data);
     return response.data;
   }
   const getMessages=async ()=>{
-    const response = await axios.get('http://localhost:4000/messages', { withCredentials: true });
+    const response = await axios.get('https://backendchatapp-ghen.onrender.com/messages', { withCredentials: true });
     setMessages(response.data);
     return response.data;
   }

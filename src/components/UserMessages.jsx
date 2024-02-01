@@ -50,7 +50,7 @@ const UserMessages = () => {
          return displayDate;
     }
     const handleSend=async ()=>{
-      const response=await axios.post('http://localhost:4000/sendmessage',
+      const response=await axios.post('https://backendchatapp-ghen.onrender.com/sendmessage',
       {
         message:message,
         receiverid:id
