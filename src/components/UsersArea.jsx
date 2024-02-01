@@ -37,12 +37,10 @@ const UsersArea = () => {
         }
     }));
     }
-    setTimeout(()=>{
       socket.connect();
       socket.on('db-changes', onMessageReceived);
       socket.on('online', onUserBeingOnline);
       socket.on('offline', onUserBeingOffline);
-    },20000);
     return ()=>{
       socket.off('db-changes',onMessageReceived);
       socket.off('online',onUserBeingOnline);
