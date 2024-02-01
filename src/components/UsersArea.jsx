@@ -42,7 +42,7 @@ const UsersArea = () => {
       socket.on('db-changes', onMessageReceived);
       socket.on('online', onUserBeingOnline);
       socket.on('offline', onUserBeingOffline);
-    },3000);
+    },20000);
     return ()=>{
       socket.off('db-changes',onMessageReceived);
       socket.off('online',onUserBeingOnline);
