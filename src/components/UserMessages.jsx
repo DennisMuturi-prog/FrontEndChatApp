@@ -21,7 +21,8 @@ const UserMessages = () => {
     
     useEffect(scrollToBottom,[messages]);
     const checkDate=(time)=>{
-      const messageDate = new Date(time);
+          const timeDate = new Date(time);
+          const messageDate = new Date(Date.UTC(timeDate.getFullYear(), timeDate.getMonth(), timeDate.getDate()));
           const today = new Date();
           const yesterday = new Date();
           yesterday.setDate(today.getDate() - 1);
