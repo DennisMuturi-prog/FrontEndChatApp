@@ -11,7 +11,7 @@ const Login = () => {
     const navigate=useNavigate();
     const handleSubmit=async (event)=>{
         event.preventDefault();
-        const response=await axios.post('https://backendchatapp-ghen.onrender.com/login',
+        const response=await axios.post('http://localhost:4000/login',
         {
             email:email,
             password:password
