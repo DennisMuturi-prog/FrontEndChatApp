@@ -13,7 +13,7 @@ const Register = () => {
   const handleSubmit=async (event)=>{
     event.preventDefault();
     if(password===confirmpassword){
-      const response=await axios.post('https://backendchatapp-ghen.onrender.com/register',
+      const response=await axios.post('http://localhost:4000/register',
       {
       username:`${firstname}${secondname}`,
       email:email,
