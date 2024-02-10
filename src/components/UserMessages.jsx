@@ -2,6 +2,8 @@ import { useLocation, useOutletContext, useParams } from "react-router-dom"
 import rightArrow from '../assets/sendArrow.svg';
 import { useRef, useState,useEffect } from "react";
 import userIcon from '../assets/user.svg';
+import unRead from '../assets/single_check_icon.svg';
+import read from '../assets/check_double_icon.svg'
 import axios  from "axios";
 const UserMessages = () => {
     const { id } = useParams();
@@ -21,8 +23,7 @@ const UserMessages = () => {
     
     useEffect(scrollToBottom,[messages]);
     const checkDate=(time)=>{
-          const timeDate = new Date(time);
-          const messageDate = new Date(Date.UTC(timeDate.getFullYear(), timeDate.getMonth(), timeDate.getDate()));
+          const messageDate = new Date(time);
           const today = new Date();
           const yesterday = new Date();
           yesterday.setDate(today.getDate() - 1);
@@ -51,13 +52,13 @@ const UserMessages = () => {
          return displayDate;
     }
     const handleSend=async ()=>{
-      const response=await axios.post('https://backendchatapp-ghen.onrender.com/sendmessage',
+      const response=await axios.post('http://localhost:4000/sendmessage',
       {
         message:message,
         receiverid:id
       },
       {withCredentials:true})
-      context[1].addMessage({senderid:1,message:message,receiverid:id,time:new Date()});
+      context[1].addMessage({senderid:1,message:message,receiverid:id,time:new Date(),readstatus:'unread'});
       inputElement.current.value=''
     }
   return (
@@ -68,15 +69,24 @@ const UserMessages = () => {
       <div className="messagesbody">
         {messages[0] &&<div className="dateDiv">{checkDate(messages[0].time)}</div>}
         {messages.map((usermessage,index)=>{
-          const displayDate=checkDate(usermessage.time);
+          let displayDate;
+          if(index>0 && 
+          (new Date(usermessage.time).getDate()>new Date(messages[index-1].time).getDate()||
+          new Date(usermessage.time).getMonth()>new Date(messages[index-1].time).getMonth()||
+          new Date(usermessage.time).getFullYear()>new Date(messages[index-1].time).getFullYear())){
+            displayDate=checkDate(usermessage.time);
+          }
         return(
-        (index>0 && new Date(usermessage.time).getDate()>new Date(messages[index-1].time).getDate())
+        (index>0 && 
+          (new Date(usermessage.time).getDate()>new Date(messages[index-1].time).getDate()||
+          new Date(usermessage.time).getMonth()>new Date(messages[index-1].time).getMonth()||
+          new Date(usermessage.time).getFullYear()>new Date(messages[index-1].time).getFullYear()))
         ?<><div className="dateDiv">{displayDate}</div>
         {
           (usermessage.senderid==id || usermessage.receiverid==id)
             ?(usermessage.senderid==id)
               ?<div key={index} className="left"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
-              :<div key={index} className="right"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>  
+              :<div key={index} className="right"><span>{usermessage.message}<img src={usermessage.readstatus=='read'?read:unRead}/></span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>  
             :null
 
         }
@@ -86,7 +96,7 @@ const UserMessages = () => {
       :(usermessage.senderid==id || usermessage.receiverid==id)
             ?(usermessage.senderid==id)
               ?<div key={index} className="left"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
-              :<div key={index} className="right"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>  
+              :<div key={index} className="right"><span>{usermessage.message}<img src={usermessage.readstatus=='read'?read:unRead}/></span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>  
             :null
             );
     })}  
