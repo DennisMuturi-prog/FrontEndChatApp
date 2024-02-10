@@ -85,7 +85,7 @@ const ProfilePic = () => {
             {showUploadBtn&&<button
             onClick={async ()=>{
                 const dataUrl=previousCanvasRef.current.toDataURL();
-                const response=await axios.post('https://backendchatapp-ghen.onrender.com/profilepic',
+                const response=await axios.post('http://localhost:4000/profilepic',
                 {imageUrl:dataUrl},
                 {withCredentials:true}
                 ) ;
