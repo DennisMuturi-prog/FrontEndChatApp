@@ -161,6 +161,9 @@ nav h1{
   width: fit-content;
   margin-left: auto;
 }
+.left>span:nth-child(1)>img{
+  color: white;
+}
 .right span {
   display: block;
 }
@@ -220,10 +223,10 @@ nav h1{
   .messages{
     margin-top: 77px;
     margin-left: 0;
-    height: 85vh;
+    height: 87vh;
   }
   .messagesbody{
-    height: 375px;
+    height:80vh;
   }
 }
 @media only screen and (min-width: 600px) {
