@@ -37,14 +37,30 @@ const UsersArea = () => {
         }
     }));
     }
+    function messagesRead(messageRead){
+      console.log(messageRead);
+      setMessages(messages => messages.map((message) => {
+        if(message._id == messageRead._id){
+            return {...message, readstatus: 'read'}
+        } else {
+          if(!Object.prototype.hasOwnProperty.call(message, '_id')){
+            return {...message, readstatus: 'read'}
+          }
+            return message;
+        }
+      }));
+
+    }
       socket.connect();
       socket.on('db-changes', onMessageReceived);
       socket.on('online', onUserBeingOnline);
       socket.on('offline', onUserBeingOffline);
+      socket.on('read-changes',messagesRead);
     return ()=>{
       socket.off('db-changes',onMessageReceived);
       socket.off('online',onUserBeingOnline);
       socket.off('offline',onUserBeingOffline);
+      socket.off('read-changes',messagesRead)
       socket.disconnect();
     }
     
