@@ -1,3 +1,4 @@
+import { UnreadMessage } from './UnreadMessage';
 import { useLocation, useOutletContext, useParams } from "react-router-dom"
 import rightArrow from '../assets/sendArrow.svg';
 import { useRef, useState,useEffect } from "react";
@@ -15,6 +16,7 @@ const UserMessages = () => {
     const inputElement=useRef();
     const messagesEndRef=useRef();
     const unreadMessage=useRef();
+    const [unreadIndex,setUnreadIndex]=useState();
     useEffect(()=>{
       const messages=context[0].usermessages.filter(message=>message.receiverid==id || message.senderid==id);
       setMessages(messages);
@@ -22,19 +24,13 @@ const UserMessages = () => {
     const scrollToBottom = () => {
       if(unreadMessage.current){
         unreadMessage.current.scrollIntoView({ behavior: "smooth" });
+        console.log(unreadMessage.current);
       }
       else{
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        console.log(unreadMessage.current);
       }  
     };
-    const readMessage=async ()=>{
-      console.log(messages[messages.length-1]);
-      await axios.post('http://localhost:4000/readMessage',
-          {_id:messages[messages.length-1]._id},
-          {withCredentials:true}  );
-
-    }
-    
     useEffect(scrollToBottom,[messages]);
     
     const checkDate=(time)=>{
@@ -85,14 +81,16 @@ const UserMessages = () => {
           if(index>0 && differenceInCalendarDays(new Date(usermessage.time),new Date(messages[index-1].time))>0){
             displayDate=checkDate(usermessage.time);
           }
+          
         return(
         (index>0 && differenceInCalendarDays(new Date(usermessage.time),new Date(messages[index-1].time))>0)
         ?<><div className="dateDiv">{displayDate}</div>
         {
           (usermessage.senderid==id || usermessage.receiverid==id)
             ?(usermessage.senderid==id)
-              ?usermessage.readstatus=='unread'&& !unreadMessage.current?<div ref={unreadMessage} key={index} className="left"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
-                                                                        :<div key={index} className="left"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
+              ?(usermessage.readstatus=='unread')
+                ?<UnreadMessage   usermessage={usermessage} index={index}  />
+                :<div key={index} className="left"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
               :<div key={index} className="right"><span>{usermessage.message}<img src={usermessage.readstatus=='read'?read:unRead}/></span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>  
             :null
 
@@ -102,8 +100,9 @@ const UserMessages = () => {
 
       :(usermessage.senderid==id || usermessage.receiverid==id)
             ?(usermessage.senderid==id)
-              ?usermessage.readstatus=='unread'&& !unreadMessage.current?<div ref={unreadMessage} key={index} className="left"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
-                                                                        :<div key={index} className="left"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
+              ?(usermessage.readstatus=='unread')
+                ?<UnreadMessage   usermessage={usermessage} index={index} />
+                :<div key={index} className="left"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
               :<div key={index} className="right"><span>{usermessage.message}<img src={usermessage.readstatus=='read'?read:unRead}/></span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>  
             :null
             );
