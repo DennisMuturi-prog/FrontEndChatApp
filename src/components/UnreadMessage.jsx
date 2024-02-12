@@ -9,10 +9,10 @@ export function UnreadMessage({
       const observer=new IntersectionObserver(entries=>{
         const entry=entries[0];
         if(entry.isIntersecting){
-          readMessage(usermessage._id);
+            setTimeout(()=>readMessage(usermessage._id),2000);
         }
       });
-    observer.observe(unreadMessage.current);
+        observer.observe(unreadMessage.current);
     },[])
     const readMessage=async (messageid)=>{
       await axios.post('http://localhost:4000/readMessage',
