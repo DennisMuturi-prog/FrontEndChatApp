@@ -89,19 +89,16 @@ const UserMessages = () => {
           (usermessage.senderid==id || usermessage.receiverid==id)
             ?(usermessage.senderid==id)
               ?(usermessage.readstatus=='unread')
-                ?<UnreadMessage   usermessage={usermessage} index={index}  />
+                ?(messages[index-1].readstatus=='read')?<><div ref={unreadMessage}>Unread messages</div><UnreadMessage   usermessage={usermessage} index={index} /></>:<UnreadMessage   usermessage={usermessage} index={index} />
                 :<div key={index} className="left"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
               :<div key={index} className="right"><span>{usermessage.message}<img src={usermessage.readstatus=='read'?read:unRead}/></span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>  
             :null
-
         }
-
         </>
-
       :(usermessage.senderid==id || usermessage.receiverid==id)
             ?(usermessage.senderid==id)
               ?(usermessage.readstatus=='unread')
-                ?<UnreadMessage   usermessage={usermessage} index={index} />
+                ?(messages[index-1].readstatus=='read')?<><div ref={unreadMessage}>Unread messages</div><UnreadMessage   usermessage={usermessage} index={index} /></>:<UnreadMessage   usermessage={usermessage} index={index} />
                 :<div key={index} className="left"><span>{usermessage.message}</span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
               :<div key={index} className="right"><span>{usermessage.message}<img src={usermessage.readstatus=='read'?read:unRead}/></span><span>{usermessage.time&&new Date(usermessage.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>  
             :null
