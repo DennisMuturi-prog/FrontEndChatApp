@@ -15,7 +15,7 @@ export function UnreadMessage({
         observer.observe(unreadMessage.current);
     },[])
     const readMessage=async (messageid)=>{
-      await axios.post('https://backendchatapp-ghen.onrender.com/',
+      await axios.post('https://backendchatapp-ghen.onrender.com/readMessage',
           {_id:messageid},
           {withCredentials:true}  );
 
