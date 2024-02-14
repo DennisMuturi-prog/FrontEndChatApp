@@ -16,22 +16,22 @@ const UserMessages = () => {
     const inputElement=useRef();
     const messagesEndRef=useRef();
     const unreadMessage=useRef();
-    const [unreadIndex,setUnreadIndex]=useState();
+    const [firstTimeScroll,setFirstTimeScroll]=useState(true);
+    console.log(firstTimeScroll);
     useEffect(()=>{
       const messages=context[0].usermessages.filter(message=>message.receiverid==id || message.senderid==id);
       setMessages(messages);
     },[id,context])
     const scrollToBottom = () => {
-      if(unreadMessage.current){
-        unreadMessage.current.scrollIntoView({ behavior: "smooth" });
-        console.log(unreadMessage.current);
-      }
-      else{
+      if(!unreadMessage.current){
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-        console.log(unreadMessage.current);
       }  
     };
+    const scrollToUnread = () => {
+      unreadMessage.current?.scrollIntoView({ behavior: "smooth" });   
+    }
     useEffect(scrollToBottom,[messages]);
+    useEffect(scrollToUnread,[messages]);
     
     const checkDate=(time)=>{
           const messageDate = new Date(time);
